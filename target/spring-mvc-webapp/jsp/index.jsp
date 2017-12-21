@@ -16,13 +16,11 @@
                 alert("Copied!");
             }
             function changeText() {
-                var change = document.getElementById("button");
-                if(change.value === "Shorten URL"){
-                    change.value = "Copy";
-                }else{
-                    change.value = "Shorten URL";
-                }
-                
+
+                var copy = document.getElementById("changeText");
+                copy.value = "Copy";
+
+                alert("button value = " + copy.value);
             }
         </script>
     </head>
@@ -41,46 +39,43 @@
                     <tr>
                     <div class="form">
                         <form class="form" role="form" id="shorten-Url" name="shortURL"
-                              method= "POST" action="shortenUrl"> 
+                              method= "POST" action="shortenUrl" onsubmit="changeText()">
                             <h3>Shorten any URL in less than a second</h3>                     
                             <h4>Make it easier to send and embed links.</h4>
-                            <div class="form-group">                              
-                                <div class="col-md-8">
-                                    <h5 style="float:left;">Link</h5>
-                                    <input type="text" class="form-control" name="link" 
-                                           placeholder="Type in or paste link here" required/>
-                                </div>
+                            <div class="col-md-8">
+                                <h5 style="float:left;">Link</h5>
+                                <input type="text" class="form-control" name="link" 
+                                       placeholder="Type in or paste link here" required/>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-8">
-                                    <h5 style="float:left;">Shortened URL</h5>
-                                    <input type="text" 
-                                           class="form-control"
-                                           id="shortUrl"
-                                           name="view-shortened-url"
-                                           align="center"
-                                           value="${shortURL}"
-                                           title="Press ⌘ + C to copy"
-                                           oncopy="alertCopy()"
-                                           disabled/>
-                                    <br/>
-                                </div> 
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <p id="submit-button">
-                                        <button type="submit" id="button"
-                                                name="submit-button"
-                                                onclick="changeText()"
-                                                value="Shorten URL">
-                                            <span style="color:blue;
-                                                  font-weight:bold;">
-                                                Shorten URL
-                                            </span>
-                                        </button>
-
-                                    </p>
-                                </div>
+                            <div class="col-md-8">
+                                <h5 style="float:left;">Shortened URL</h5>
+                                <input type="text" 
+                                       class="form-control"                                           
+                                       value="${shortURL}" 
+                                       id="shortURL"
+                                       name="view-shortened-url"
+                                       align="center"                                         
+                                       title="Press ⌘ + C to copy"
+                                       oncopy="alertCopy()"
+                                       disabled/>
+                                <br/>
+                            </div> 
+                            <div class="col-md-12">
+                                <p id="submit-button">
+                                    <button type="submit" id="button" 
+                                            name="submit-button"
+                                            value="${s}">
+                                        <span style="color:blue;
+                                              font-weight:bold;" id="changeText">
+                                            <c:choose>
+                                                <c:when test="${copy} != null">
+                                                    ${copy}
+                                                </c:when>
+                                                
+                                            </c:choose>
+                                        </span>
+                                    </button>
+                                </p>                           
                             </div>
                         </form>
                     </div>
@@ -97,22 +92,22 @@
                                      width="25" height="10"> 
                             </td>
                             <td>
-                                <h4>
+                                <u>
                                     <a href="tel:+14248293729" class="tel">
                                         +1 424 829 3729
                                     </a>
-                                </h4>
+                                </u>
                             </td>
                             <td>
                                 <img class="img-responsive" src="${pageContext.request.contextPath}/images/Email Icon.png" 
                                      width="25" height="10"> 
                             </td>
                             <td>
-                                <h4>
-                                    <a href="mailto:thisisatest@gmail.com" style="">
+                                <u>
+                                    <a href="mailto:thisisatest@gmail.com" class="email">
                                         thisisatest@gmail.com
                                     </a>
-                                </h4>
+                                </u>
                             </td>
                             <td>
                                 <span class="company">© The Testing Company. All Rights Reserved.</span>

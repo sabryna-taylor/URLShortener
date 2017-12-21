@@ -40,11 +40,11 @@ body{
     background-size: cover;
 }
 .company{
-    float:right
+    float:right;
 }
 .table{
-    border-color: black;
-    border: none;
+    background-color: black;
+    border: 0px;
 }
 #button{
     border: none;
@@ -55,4 +55,11 @@ body{
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+}
+.img-responsive{
+    float:right;
+}
+ .tel, .email, .company{
+   font-weight: bold;
+   font-size: 140%;
 }

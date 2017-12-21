@@ -30,6 +30,7 @@ public class MainController {
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String displayHomePage(Model model) {
+        model.addAttribute("s", "Shorten URL");
         return "index";
     }
 
@@ -64,6 +65,7 @@ public class MainController {
             String shortURL = (String) map.get("id");
             
             model.addAttribute("shortURL", shortURL);
+            model.addAttribute("copy", "Copy");           
             return "index";
 
         } catch (Exception e) {
@@ -74,19 +76,3 @@ public class MainController {
 
     }
 }
-
-/*
-String longURL = request.getParameter("shortenUrl");
-        
-        String map = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuilder tinyUrl = new StringBuilder();
-        while (id > 0) {
-            tinyUrl.append(map.charAt(id % 62));
-            id /= 62;
-        }
-        return tinyUrl.reverse().toString();
-
-        //URL googleAPI = new URL("https://www.googleapis.com/auth/urlshortener?key=");
-        // model.addAttribute(); add shortened URL here
-        return "index";
- */
