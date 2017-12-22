@@ -15,16 +15,17 @@
             function alertCopy() {
                 alert("Copied!");
             }
-            function changeText() {
+            function highlightText() {
+                $('#shortUrl').focus().select();
+            }
 
-                var copy = document.getElementById("changeText");
-                copy.value = "Copy";
-
-                alert("button value = " + copy.value);
+            function disabledOn() {
+                $('#shortUrl').prop('disabled', true);
             }
         </script>
     </head>
-    <body background="${pageContext.request.contextPath}/images/Background Image.png">
+    <body background="${pageContext.request.contextPath}/images/Background Image.png"
+          onload="highlightText(); disabledOn();" id="b">
         <div class="container">
 
             <div class="table-responsive">
@@ -39,8 +40,8 @@
                     <tr>
                     <div class="form">
                         <form class="form" role="form" id="shorten-Url" name="shortURL"
-                              method= "POST" action="shortenUrl" onsubmit="changeText()">
-                            <h3>Shorten any URL in less than a second</h3>                     
+                              method= "POST" action="shortenUrl" onsubmit="disabledOff()">
+                            <h3 id="url">Shorten any URL in less than a second</h3>                     
                             <h4>Make it easier to send and embed links.</h4>
                             <div class="col-md-8">
                                 <h5 style="float:left;">Link</h5>
@@ -51,28 +52,21 @@
                                 <h5 style="float:left;">Shortened URL</h5>
                                 <input type="text" 
                                        class="form-control"                                           
-                                       value="${shortURL}" 
-                                       id="shortURL"
-                                       name="view-shortened-url"
+                                       value="<c:out value= "${shortURL}"/>" 
+                                       id="shortUrl"
                                        align="center"                                         
                                        title="Press ⌘ + C to copy"
                                        oncopy="alertCopy()"
-                                       disabled/>
+                                       onload="disabledOn()"/>
                                 <br/>
                             </div> 
                             <div class="col-md-12">
                                 <p id="submit-button">
                                     <button type="submit" id="button" 
-                                            name="submit-button"
-                                            value="${s}">
+                                            name="submit-button">
                                         <span style="color:blue;
                                               font-weight:bold;" id="changeText">
-                                            <c:choose>
-                                                <c:when test="${copy} != null">
-                                                    ${copy}
-                                                </c:when>
-                                                
-                                            </c:choose>
+                                            ${current}
                                         </span>
                                     </button>
                                 </p>                           

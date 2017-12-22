@@ -28,9 +28,16 @@ public class MainController {
     public static final String GOOGLE_URL_SHORTENER = "https://www.googleapis.com/urlshortener/v1/url?key=";
     public static final String API_KEY = "AIzaSyB83it73_y1Igt3nSU7Twga5-B0vcLJe1s";
 
+    String current = "";
+
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String displayHomePage(Model model) {
-        model.addAttribute("s", "Shorten URL");
+        if (current.equals("")) {
+            current = "Shorten URL";
+        } else if(current.equals("Copy")){
+            current = "Shorten URL";
+        }
+        model.addAttribute("current", current);
         return "index";
     }
 
@@ -63,9 +70,14 @@ public class MainController {
             output.close();
             response.close();
             String shortURL = (String) map.get("id");
-            
+
             model.addAttribute("shortURL", shortURL);
-            model.addAttribute("copy", "Copy");           
+
+            if (current.equals("Shorten URL")) {
+                current = "Copy";
+            }
+
+            model.addAttribute("current", current);
             return "index";
 
         } catch (Exception e) {
@@ -76,3 +88,8 @@ public class MainController {
 
     }
 }
+/*
+if(current.equals("Shorten URL")){
+                current = "Copy";              
+            }
+*/
